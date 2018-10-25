@@ -63,7 +63,7 @@ def copy_bootstrap(bootstrap_target: Path) -> None:
                 shutil.copyfile(f.absolute(), bootstrap_target / f.name)
 
 
-def _interpreter_path(append_version: bool=False) -> str:
+def _interpreter_path(append_version: bool = False) -> str:
     """A function to return the path to the current Python interpreter.
 
     Even when inside a venv, this will return the interpreter the venv was created with.
