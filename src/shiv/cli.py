@@ -78,10 +78,18 @@ def _interpreter_path(append_version: bool = False) -> str:
 
     try:
         return str(next(iter(base_dir.rglob(name))))
+
     except StopIteration:
+
         if not append_version:
+            # If we couldn't find an interpreter, it's likely that we looked for
+            # "python" when we should've been looking for "python3"
+            # so we try again with append_version=True
             return _interpreter_path(append_version=True)
-        raise
+
+        # If we were still unable to find a real interpreter for some reason
+        # we fallback to the current runtime's interpreter
+        return sys.executable
 
 
 @click.command(
